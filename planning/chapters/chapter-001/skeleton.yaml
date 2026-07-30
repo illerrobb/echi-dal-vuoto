@@ -1,6 +1,7 @@
 schema: chapter-skeleton/v1
 chapter: chapter-001
 intent-version: 1
+version: 1
 status: proposed
 overview: {summary: "Esempio strutturale senza prosa", primary-conflict: "resistenza contro necessità", chapter-turn: "la prova rende impossibile ignorare la chiamata", climax: "scelta differita", resolution: "nuovo obbligo", exit-hook: "una conseguenza imminente"}
 progressions: {tension: {start: 0.2, peak: 0.8, end: 0.6}, emotional: {start: guarded, end: destabilized}, knowledge: {reader-gains: [], characters-gain: {}}, power: {start: {}, end: {}}}
