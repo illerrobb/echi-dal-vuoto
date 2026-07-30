@@ -1,0 +1,33 @@
+schema: expert-registry/v1
+decision-mode: hybrid
+experts:
+  - id: narrative-architect
+    enabled: true
+    weight: 1.0
+  - id: character-psychologist
+    enabled: true
+    weight: 1.0
+  - id: theme-editor
+    enabled: true
+    weight: 1.0
+  - id: subtext-dialogue-editor
+    enabled: true
+    weight: 1.0
+  - id: continuity-guardian
+    enabled: true
+    weight: 1.0
+  - id: pacing-editor
+    enabled: true
+    weight: 1.0
+  - id: worldbuilding-specialist
+    enabled: true
+    weight: 1.0
+  - id: reader-advocate
+    enabled: true
+    weight: 1.0
+  - id: devils-advocate
+    enabled: true
+    weight: 1.0
+  - id: style-custodian
+    enabled: true
+    weight: 1.0

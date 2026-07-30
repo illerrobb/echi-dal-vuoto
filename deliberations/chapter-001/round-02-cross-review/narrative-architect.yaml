@@ -1,0 +1,4 @@
+schema: cross-review/v1
+expert: narrative-architect
+subject: chapter-001
+responses: [{finding: causal-detail, stance: maintain, evidence: [planning/chapters/chapter-001/skeleton.yaml], request: null}]

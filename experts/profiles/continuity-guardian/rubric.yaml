@@ -1,0 +1,5 @@
+schema: expert-rubric/v1
+scale: {minimum: 0, maximum: 1, scientific-measure: false}
+criteria:
+  - {id: evidence, weight: 1.0, requires-citation: true}
+  - {id: actionable-alternative, weight: 0.8, requires-citation: false}

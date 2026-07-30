@@ -1,0 +1,12 @@
+schema: council-briefing/v1
+immutable: true
+chapter: chapter-001
+state: EXPERT_DELIBERATION
+objective: "Valutare lo skeleton dimostrativo"
+constraints: [no-prose, no-canon-mutation]
+required-results: [independent-opinions, disagreement-map, alternatives, decision]
+forbidden: [scene-artifacts]
+open-questions: ["La pressione iniziale è sufficiente?"]
+relevant-files: [planning/chapters/chapter-001/intent.yaml]
+previous-decisions: []
+depth: standard

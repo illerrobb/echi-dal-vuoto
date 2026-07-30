@@ -1,0 +1,14 @@
+schema: beat-review/v1
+beat: beat-000
+contract-version: 1
+manuscript-version: 1
+contract-compliance: {verdict: pass, blocking-findings: [], deviations: []}
+structural: {purpose-achieved: null, goal-clarity: null, opposition-pressure: null, turn-strength: null, outcome-causality: null, state-change: null}
+character: {motivation: null, emotional-causality: null, behavioral-consistency: null, relational-change: null}
+communication: {subtext: null, information-control: null, theme-embodiment: null, exposition-control: null}
+prose: {voice-consistency: null, sensory-specificity: null, rhythm: null, cliché-control: null}
+continuity: {canon: pass, timeline: pass, knowledge: pass, inventory: pass, relationships: pass}
+verdict: revise
+blocking-findings: []
+optional-findings: []
+recommended-actions: []

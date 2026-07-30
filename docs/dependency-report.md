@@ -49,3 +49,9 @@ L'assenza di OpenCode impedisce in questa fase una prova end-to-end del caricame
 5. Ricopiare `story-skills/skills/*` e dereferenziare il tap Better Writing (`cp -RL`) in `.opencode/skills/`; preservare la skill locale `beat-adapter`.
 6. Aggiornare `dependencies.lock.yaml` e questo rapporto.
 7. Eseguire `python3 scripts/verify_dependencies.py` e la futura suite completa, quindi esaminare `git diff` prima del commit.
+
+## Runtime deterministico (Fasi 2–8)
+
+- Node.js >=18; `js-yaml` 4.1.0 e `ajv` 8.17.1 sono bloccati in `package-lock.json` e non sono SDK LLM.
+- Servono solo a parsing YAML e JSON Schema; non accedono alla rete a runtime e non generano contenuti.
+- Installazione riproducibile: `npm ci --ignore-scripts`; audit e aggiornamenti richiedono revisione del lockfile.

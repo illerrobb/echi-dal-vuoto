@@ -1,0 +1,10 @@
+schema: expert-opinion/v1
+expert: narrative-architect
+subject: chapter-001
+position: "La catena minima è valida ma astratta"
+confidence: 0.72
+findings:
+  - {id: causal-detail, severity: major, claim: "Gli esiti sono ancora astratti", evidence: ["planning/chapters/chapter-001/beats/beat-001.yaml"], impact: "Audit semantico debole", recommendation: "Specificare eventi dopo approvazione dell'alternativa", alternative: "Mantenere il demo solo strutturale"}
+assumptions: [{hypothesis: "Il demo non è canone", confidence: 1.0, evidence: [story.md], counterevidence: [], status: open}]
+questions: []
+out-of-domain: []

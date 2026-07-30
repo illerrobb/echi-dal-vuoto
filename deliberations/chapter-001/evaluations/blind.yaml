@@ -1,0 +1,5 @@
+schema: blind-evaluation/v1
+subject: chapter-001
+evaluator: narrative-architect
+scores: [{alternative: alt-a, fit: 0.8}, {alternative: alt-b, fit: 0.5}, {alternative: alt-c, fit: 0.9}]
+evidence: [planning/chapters/chapter-001/intent.yaml]
