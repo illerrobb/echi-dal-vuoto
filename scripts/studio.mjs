@@ -40,6 +40,7 @@ function validateProject({emit=true}={}){
   const ajv=new Ajv2020({allErrors:true,strict:false});
   const schemas=loadSchemas(ajv,errors);
   const ids=new Map();
+  const documents=new Map();
   const ignored=['/vendor/','/node_modules/','/.opencode/skills/'];
   for(const f of files(root,'.yaml')){
     const normalized=`/${relative(f)}`;
@@ -49,7 +50,8 @@ function validateProject({emit=true}={}){
     if(!data?.schema){errors.push(`${relative(f)}: campo schema mancante`);continue;}
     if(!schemas.has(data.schema)){errors.push(`${relative(f)}: schema sconosciuto ${data.schema}`);continue;}
     const validator=ajv.getSchema(data.schema);
-    if(!validator(data))errors.push(`${relative(f)}: ${ajv.errorsText(validator.errors)}`);
+    if(!validator(data)){errors.push(`${relative(f)}: ${ajv.errorsText(validator.errors)}`);continue;}
+    documents.set(relative(f),data);
     const id=data?.identity?.id;
     if(id){if(ids.has(id))errors.push(`ID duplicato ${id}: ${ids.get(id)}, ${relative(f)}`);ids.set(id,relative(f));}
   }
@@ -57,12 +59,14 @@ function validateProject({emit=true}={}){
   if(fs.existsSync(chaptersDir))for(const chapter of fs.readdirSync(chaptersDir)){
     const base=`planning/chapters/${chapter}`;
     if(!fs.existsSync(path.join(root,base,'skeleton.yaml')))continue;
-    const skeleton=readYaml(`${base}/skeleton.yaml`);
+    const skeleton=documents.get(`${base}/skeleton.yaml`);
+    if(!skeleton)continue;
     const beats=skeleton['beat-sequence']||[];
     beats.forEach((id,index)=>{
       const p=`${base}/beats/${id}.yaml`;
       if(!fs.existsSync(path.join(root,p))){errors.push(`${base}/skeleton.yaml: riferimento mancante ${id}`);return;}
-      const beat=readYaml(p);
+      const beat=documents.get(p);
+      if(!beat)return;
       if(beat.identity.chapter!==chapter)errors.push(`${p}: chapter incoerente`);
       if(beat.identity['sequence-index']!==index+1)errors.push(`${p}: sequence-index errato`);
       const previous=index?beats[index-1]:null;
@@ -72,7 +76,7 @@ function validateProject({emit=true}={}){
     const manuscript=path.join(root,`manuscript/chapters/${chapter}/chapter.md`);
     if(fs.existsSync(manuscript)){
       const body=fs.readFileSync(manuscript,'utf8').replace(/^#.*$/m,'').replace(/<!--[^]*?-->/g,'').trim();
-      if(body&&(skeleton.status!=='approved'||beats.some(id=>readYaml(`${base}/beats/${id}.yaml`).identity.status!=='approved')))errors.push(`${relative(manuscript)}: prosa presente senza skeleton e contratti approvati`);
+      if(body&&(skeleton.status!=='approved'||beats.some(id=>documents.get(`${base}/beats/${id}.yaml`)?.identity?.status!=='approved')))errors.push(`${relative(manuscript)}: prosa presente senza skeleton e contratti approvati`);
     }
   }
   const forbiddenRoots=['planning','manuscript','story','continuity','deliberations','reviews','proposals','decisions','knowledge','.studio','templates'];
@@ -88,6 +92,25 @@ function approvalFor(chapter){
   const p=`planning/chapters/${chapter}/approval.yaml`;
   return fs.existsSync(path.join(root,p))?{path:p,data:readYaml(p)}:null;
 }
+function approvalErrors(chapter,{beatId=null}={}){
+  const base=`planning/chapters/${chapter}`;const approval=approvalFor(chapter);const errors=[];
+  const skeletonPath=`${base}/skeleton.yaml`;
+  if(!fs.existsSync(path.join(root,skeletonPath)))return [`Skeleton mancante per ${chapter}`];
+  const skeleton=readYaml(skeletonPath);const beatIds=skeleton['beat-sequence']||[];
+  if(!approval?.data?.approved?.by||!approval.data.approved.at)return [`Approvazione umana versionata mancante per ${chapter}`];
+  if(approval.data.chapter!==chapter)errors.push(`L’approvazione appartiene a ${approval.data.chapter}, non a ${chapter}`);
+  if(approval.data.artifacts?.skeleton?.version!==skeleton.version)errors.push('La versione approvata dello skeleton non coincide con l’artefatto corrente');
+  const approvedBeats=approval.data.artifacts?.beats||[];const approvedIds=approvedBeats.map(item=>item.id);
+  if(new Set(approvedIds).size!==approvedIds.length)errors.push('L’approvazione contiene Beat Contract duplicati');
+  if(approvedIds.length!==beatIds.length||beatIds.some(id=>!approvedIds.includes(id))||approvedIds.some(id=>!beatIds.includes(id)))errors.push('L’approvazione non copre esattamente la sequenza corrente dei beat');
+  for(const id of beatIds){
+    const beatPath=`${base}/beats/${id}.yaml`;if(!fs.existsSync(path.join(root,beatPath)))continue;
+    const approved=approvedBeats.find(item=>item.id===id);const beat=readYaml(beatPath);
+    if(approved?.version!==beat.identity.version)errors.push(`Versione approvata non corrente per ${id}`);
+  }
+  if(beatId&&!beatIds.includes(beatId))errors.push(`${beatId} non appartiene alla sequenza corrente`);
+  return errors;
+}
 const transitions={PROJECT_ORIENTATION:'BOOK_ARCHITECTURE',BOOK_ARCHITECTURE:'CHAPTER_INTENT',CHAPTER_INTENT:'EXPERT_DELIBERATION',EXPERT_DELIBERATION:'CHAPTER_SKELETON',CHAPTER_SKELETON:'BEAT_DESIGN',BEAT_DESIGN:'AWAITING_APPROVAL',AWAITING_APPROVAL:'DRAFTING',DRAFTING:'CONTRACT_AUDIT',CONTRACT_AUDIT:'EXPERT_REVIEW',EXPERT_REVIEW:'REVISION',REVISION:'CANON_UPDATE',CANON_UPDATE:'CHAPTER_ACCEPTED'};
 function option(name){const index=args.indexOf(name);return index>=0?args[index+1]:null;}
 function transition(){
@@ -95,9 +118,9 @@ function transition(){
   if(transitions[state.state]!==target)errors.push(`Transizione illegale: ${state.state} → ${target||'(mancante)'}`);
   if(!actor||!reason)errors.push('La transizione richiede --actor e --reason');
   if(target==='DRAFTING'){
-    const base=`planning/chapters/${state.chapter}`;const skeleton=readYaml(`${base}/skeleton.yaml`);const approval=approvalFor(state.chapter);
+    const base=`planning/chapters/${state.chapter}`;const skeleton=readYaml(`${base}/skeleton.yaml`);
     if(skeleton.status!=='approved'||skeleton['beat-sequence'].some(id=>readYaml(`${base}/beats/${id}.yaml`).identity.status!=='approved'))errors.push('Skeleton e tutti i Beat Contract devono essere approvati');
-    if(!approval?.data?.approved?.by)errors.push('Record di approvazione umana mancante');
+    errors.push(...approvalErrors(state.chapter));
   }
   const validation=validateProject({emit:false});if(!validation.ok)errors.push(...validation.errors);
   if(errors.length)return result(false,'transition',{state:state.state,target},errors);
@@ -121,14 +144,7 @@ function gate(name){
     else if(readYaml(skeletonPath).status!=='approved')errors.push('Chapter Skeleton non approvato');
     if(beatId&&!fs.existsSync(path.join(root,beatPath)))errors.push(`Beat Contract mancante: ${beatId}`);
     else if(beatId&&readYaml(beatPath).identity.status!=='approved')errors.push(`Beat Contract non approvato: ${beatId}`);
-    const approval=approvalFor(state.chapter);
-    if(!approval?.data?.approved?.by||!approval.data.approved.at)errors.push(`Approvazione umana versionata mancante per ${state.chapter}`);
-    else if(beatId){
-      const beat=readYaml(beatPath);
-      const approvedBeat=approval.data.artifacts?.beats?.find(item=>item.id===beatId);
-      const skeleton=readYaml(skeletonPath);
-      if(approval.data.artifacts?.skeleton?.version!==skeleton.version||approvedBeat?.version!==beat.identity.version)errors.push('Le versioni approvate non coincidono con gli artefatti correnti');
-    }
+    errors.push(...approvalErrors(state.chapter,{beatId}));
   }
   if(errors.length)return result(false,name,{state:state.state},errors);
   const validation=validateProject({emit:false});

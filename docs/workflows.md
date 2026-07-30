@@ -7,3 +7,7 @@ Ogni transizione è persistita in `.studio/workflow-state.yaml`. `AWAITING_APPRO
 L'approvazione è un artefatto versionato `planning/chapters/<chapter-id>/approval.yaml` conforme a `chapter-approval/v1`: registra identità e data umane e le versioni esatte di skeleton e beat. Lo stato `DRAFTING` da solo non autorizza la prosa: il gate deterministico verifica anche questi riferimenti. `studio.mjs transition <STATO> --actor <identità> --reason <motivazione>` applica esclusivamente la transizione successiva prevista, rivalida il progetto e persiste lo storico con scrittura atomica; l'ingresso in `DRAFTING` richiede inoltre tutte le approvazioni.
 
 L'export legge l'ordine dei capitoli da `planning/book/architecture.yaml` e accetta soltanto metadata con stato `accepted`; se un capitolo previsto è incompleto, l'intera esportazione fallisce.
+
+## Integrità dell'approvazione
+
+L'ingresso in `DRAFTING` e il gate `beat-draft` condividono lo stesso controllo deterministico. L'approvazione deve riferirsi al capitolo attivo, allo skeleton corrente e all'insieme esatto dei beat della sua sequenza; ID duplicati, beat mancanti o estranei e qualunque versione obsoleta bloccano entrambi i percorsi. Il timestamp è registrato in formato RFC 3339 con fuso orario esplicito.
