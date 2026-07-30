@@ -10,6 +10,12 @@ L'approvazione è un artefatto versionato `planning/chapters/<chapter-id>/approv
 
 L'export legge l'ordine dei capitoli da `planning/book/architecture.yaml` e accetta soltanto metadata con stato `accepted`; se un capitolo previsto è incompleto, l'intera esportazione fallisce.
 
+## Eventi e stato derivato
+
+Durante `BEAT_DESIGN` il Narrative Architect dichiara eventi e conseguenze attesi nel Beat Contract. Il drafting li riporta nel Draft Manifest senza mutare il canone. `CONTRACT_AUDIT` confronta atteso e realizzato; `EXPERT_REVIEW` coinvolge Character Psychologist, Worldbuilding Specialist e Continuity Guardian in base agli effetti e alla profondità. In `CANON_UPDATE` il Canon Curator accetta soltanto eventi provenienti da proposte approvate. `studio.mjs` può quindi ricostruire e validare lo stato.
+
+La state machine non cambia e non vengono introdotti nuovi agenti. `rebuild-state` è una scrittura esplicita limitata a uno snapshot derivato e ricostruibile; non approva eventi e non modifica manoscritto o fonte canonica.
+
 ## Integrità dell'approvazione
 
 L'ingresso in `DRAFTING` e il gate `beat-draft` condividono lo stesso controllo deterministico. L'approvazione deve riferirsi al capitolo attivo, allo skeleton corrente e all'insieme esatto dei beat della sua sequenza; ID duplicati, beat mancanti o estranei e qualunque versione obsoleta bloccano entrambi i percorsi. Il timestamp è registrato in formato RFC 3339 con fuso orario esplicito.

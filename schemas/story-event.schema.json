@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "story-event/v1",
+  "$defs": {
+    "effect": {
+      "type": "object",
+      "required": ["type", "subject", "operation", "value"],
+      "properties": {
+        "type": {"enum": ["character-location", "character-status", "knowledge", "belief", "emotion", "relationship", "inventory", "injury", "environment", "promise", "mystery", "world-state"]},
+        "subject": {"type": "string", "minLength": 1},
+        "property": {"type": "string", "minLength": 1},
+        "operation": {"enum": ["set", "add", "remove", "open", "resolve"]},
+        "value": {},
+        "expected-before": {},
+        "source": {"type": ["string", "null"]},
+        "certainty": {"enum": ["certain", "probable", "possible", "doubtful", "false", "unknown"]},
+        "cause": {"type": ["string", "null"]},
+        "object": {"type": ["string", "null"]},
+        "manifestation": {"type": ["string", "null"]},
+        "hidden-state": {"type": ["string", "null"]},
+        "action-tendency": {"type": ["string", "null"]},
+        "persistence": {"type": ["string", "null"]},
+        "approved-conflict": {"type": "boolean", "default": false}
+      },
+      "allOf": [
+        {"if": {"properties": {"type": {"enum": ["knowledge", "belief"]}}}, "then": {"required": ["property", "source", "certainty"]}},
+        {"if": {"properties": {"type": {"const": "emotion"}}}, "then": {"required": ["property", "cause", "object", "manifestation", "hidden-state", "action-tendency", "persistence"]}},
+        {"if": {"properties": {"type": {"enum": ["environment", "world-state"]}}}, "then": {"required": ["property", "expected-before"]}}
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["schema", "identity", "placement", "participants", "causality", "observation", "effects", "evidence", "approval"],
+  "properties": {
+    "schema": {"const": "story-event/v1"},
+    "identity": {
+      "type": "object",
+      "required": ["id", "status", "version"],
+      "properties": {
+        "id": {"pattern": "^event-[a-z0-9][a-z0-9-]*$"},
+        "status": {"enum": ["proposed", "canonical", "superseded"]},
+        "version": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "placement": {
+      "type": "object",
+      "required": ["chapter", "beat", "sequence", "narrative-time", "location"],
+      "properties": {
+        "chapter": {"pattern": "^chapter-[0-9]{3,}$"},
+        "beat": {"pattern": "^beat-[0-9]{3,}$"},
+        "sequence": {"type": "integer", "minimum": 1},
+        "narrative-time": {"type": "object", "required": ["kind", "value"], "properties": {"kind": {"enum": ["exact", "relative", "approximate", "unknown"]}, "value": {"type": ["string", "null"]}}, "additionalProperties": false},
+        "location": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "participants": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "causality": {"type": "object", "required": ["cause-events", "enables-events"], "properties": {"cause-events": {"type": "array", "uniqueItems": true, "items": {"pattern": "^event-[a-z0-9][a-z0-9-]*$"}}, "enables-events": {"type": "array", "uniqueItems": true, "items": {"pattern": "^event-[a-z0-9][a-z0-9-]*$"}}}, "additionalProperties": false},
+    "observation": {"type": "object", "required": ["observed-by", "reported-to"], "properties": {"observed-by": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "reported-to": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}}, "additionalProperties": false},
+    "effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}},
+    "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "approval": {"type": "object", "required": ["proposal", "approved-by"], "properties": {"proposal": {"type": ["string", "null"]}, "approved-by": {"type": ["string", "null"]}}, "additionalProperties": false}
+  },
+  "allOf": [{"if": {"properties": {"identity": {"properties": {"status": {"const": "canonical"}}}}}, "then": {"properties": {"approval": {"properties": {"proposal": {"type": "string", "minLength": 1}, "approved-by": {"type": "string", "minLength": 1}}}}}}],
+  "additionalProperties": false
+}

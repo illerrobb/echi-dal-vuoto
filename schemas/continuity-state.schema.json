@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "continuity-state/v1",
+  "type": "object",
+  "required": ["schema", "kind", "as-of", "state"],
+  "properties": {
+    "schema": {"const": "continuity-state/v1"},
+    "kind": {"enum": ["initial", "snapshot"]},
+    "as-of": {"type": ["string", "null"]},
+    "generated": {"type": "boolean"},
+    "input-hash": {"type": ["string", "null"]},
+    "source-events": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "state": {
+      "type": "object",
+      "required": ["character-location", "character-status", "knowledge", "belief", "emotion", "relationship", "inventory", "injury", "environment", "promise", "mystery", "world-state"],
+      "additionalProperties": {"type": "object"}
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "snapshot"}}}, "then": {"required": ["generated", "input-hash", "source-events"], "properties": {"generated": {"const": true}}}}
+  ],
+  "additionalProperties": false
+}
