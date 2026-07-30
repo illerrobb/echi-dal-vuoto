@@ -1,0 +1,17 @@
+schema: narrative-dependencies/v1
+updated: 2026-07-30
+dependencies:
+  story-skills:
+    source: https://github.com/danjdewhurst/story-skills.git
+    commit: c482d48f4eb9b488f033a77a51f9fae55cc0d75f
+    version: 0.3.1
+    license: MIT
+    vendor-path: vendor/story-skills
+    install-path: .opencode/skills
+  better-writing:
+    source: https://github.com/forjd/better-writing.git
+    commit: 4023076319e5a7838dd7587ebf3d5e3588f9544f
+    version: unversioned
+    license: MIT
+    vendor-path: vendor/better-writing
+    install-path: .opencode/skills/better-writing
