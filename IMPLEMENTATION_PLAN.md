@@ -37,4 +37,11 @@
 - **Stato:** completata (2026-07-30).
 - **Obiettivo:** eliminare falsi successi, validare schemi dichiarati, legare il drafting alle approvazioni versionate e rendere sicuro l'export multi-capitolo.
 - **Implementazione:** registry dei comandi deterministici/agentici; errori `UNKNOWN_COMMAND` e `AGENT_COMMAND_REQUIRED`; gate di drafting su skeleton, beat e identità umana; root esplicita; validazione bloccante degli schemi sconosciuti; export atomico nell'ordine dell'architettura.
-- **Limite tracciato:** gli schemi legacy nel catalogo sono registrati ma devono essere irrigiditi progressivamente; il CLI applica solo transizioni adiacenti con attore e motivazione espliciti.
+- **Limite tracciato:** il CLI applica solo transizioni adiacenti con attore e motivazione espliciti; l’irrigidimento degli schemi legacy è stato completato nella Fase 10.
+
+## Fase 10 — Integrità strutturale e delle approvazioni
+
+- **Stato:** completata (2026-07-30).
+- **Obiettivo:** chiudere i falsi positivi residui prima del drafting e rendere diagnostici gli artefatti malformati.
+- **Implementazione:** controllo condiviso delle versioni approvate e della copertura esatta dei beat; validazione in due fasi con controlli semantici solo su documenti conformi; contratti minimi reali per tutti gli schemi del catalogo.
+- **Test:** fixture isolate per artefatti incompleti, schemi catalogo permissivi, approvazioni obsolete e approvazioni complete.
