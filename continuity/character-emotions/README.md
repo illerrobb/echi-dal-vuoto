@@ -1,3 +1,3 @@
 # character-emotions
 
-Artefatti versionati per `continuity/character-emotions`. Nessuna prosa o mutazione canonica senza il gate previsto.
+Vista derivabile degli effetti `emotion`: etichetta, intensità progettuale, causa, oggetto, manifestazione, stato nascosto, tendenza all'azione e persistenza. Sono decisioni narrative, non diagnosi o misure scientifiche.

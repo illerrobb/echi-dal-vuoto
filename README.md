@@ -32,7 +32,13 @@ node scripts/studio.mjs project-status --json
 node scripts/studio.mjs validate --json
 node scripts/studio.mjs beat-draft beat-001 --json  # fallisce finché non approvato
 node scripts/studio.mjs export --json               # richiede CHAPTER_ACCEPTED
+node scripts/studio.mjs state-at beat-002 --json
+node scripts/studio.mjs knowledge-of personaggio --at beat-002 --json
+node scripts/studio.mjs history-of personaggio --json
+node scripts/studio.mjs rebuild-state --json        # rigenera solo la cache derivata
 ```
+
+Gli eventi canonici versionati in `story/timeline/` producono conseguenze tipizzate. Il CLI ricostruisce posizione, conoscenze e credenze, emozioni dichiarate, relazioni, inventario, ferite e stato degli ambienti a partire da `continuity/current-state/initial.yaml`; lo snapshot generato non è una seconda fonte di canone.
 
 I comandi OpenCode sono in `.opencode/commands/`, gli agenti in `.opencode/agents/`, gli esperti sono configurabili in `experts/`. Vedere `docs/workflows.md` per drafting/audit/revisione e `docs/opencode-integration.md` per l'invocazione subprocess.
 

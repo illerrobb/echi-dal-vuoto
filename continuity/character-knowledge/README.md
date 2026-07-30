@@ -1,3 +1,3 @@
 # character-knowledge
 
-Artefatti versionati per `continuity/character-knowledge`. Nessuna prosa o mutazione canonica senza il gate previsto.
+Vista derivabile degli effetti `knowledge` e `belief`. Ogni proposizione distingue soggetto, fonte, certezza e valore creduto; il canone resta nel registro eventi e non viene mutato senza gate.

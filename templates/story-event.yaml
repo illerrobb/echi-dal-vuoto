@@ -1,0 +1,14 @@
+schema: story-event/v1
+identity: {id: event-example, status: proposed, version: 1}
+placement:
+  chapter: chapter-001
+  beat: beat-001
+  sequence: 1
+  narrative-time: {kind: unknown, value: null}
+  location: null
+participants: []
+causality: {cause-events: [], enables-events: []}
+observation: {observed-by: [], reported-to: []}
+effects: []
+evidence: ["manuscript/chapters/chapter-001/chapter.md"]
+approval: {proposal: null, approved-by: null}

@@ -1,0 +1,16 @@
+schema: continuity-state/v1
+kind: initial
+as-of: null
+state:
+  character-location: {}
+  character-status: {}
+  knowledge: {}
+  belief: {}
+  emotion: {}
+  relationship: {}
+  inventory: {}
+  injury: {}
+  environment: {}
+  promise: {}
+  mystery: {}
+  world-state: {}

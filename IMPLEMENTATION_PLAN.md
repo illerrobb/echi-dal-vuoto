@@ -53,3 +53,11 @@
 - **Implementazione:** Creative Direction Council con tre ruoli complementari; comando agentico `/creative-direction`; profili, rubriche e minimo privilegio; brief di progetto; knowledge pack espandibili per fantascienza, horror, romanzo e tecniche di sceneggiatura; fonti e limiti tracciati.
 - **Decisioni:** nessun nuovo stato della state machine; generi e media sono knowledge pack componibili; screenplay è consulenza trasferibile al romanzo e non introduce `scenes/`; output sempre `awaiting-human`.
 - **Test:** validazione YAML/schema, riconoscimento CLI del comando agentico, test completi e verifica dipendenze.
+
+## Fase 12 — Eventi, conseguenze e stato deterministico
+
+- **Stato:** completata (2026-07-30).
+- **Obiettivo:** rendere interrogabili timeline, causalità, conoscenze e stato senza nuovi agenti o artefatti scena.
+- **Implementazione:** schema degli eventi e degli effetti tipizzati; stato iniziale; reducer puro; snapshot con hash e provenienza; comandi `state-at`, `knowledge-of`, `history-of` e `rebuild-state`; validazione di sequenza, cause, precondizioni e snapshot; adapter locale delle tecniche narrative upstream.
+- **Decisioni:** gli eventi canonici sono la fonte primaria e gli snapshot sono cache; emozioni e credenze sono decisioni narrative tracciate, non misure scientifiche; la state machine e i ruoli restano invariati.
+- **Test:** fixture di riduzione, causalità non valida, precondizioni, query temporali, conoscenze, rigenerazione e rilevazione snapshot obsoleti.
