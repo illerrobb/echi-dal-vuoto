@@ -1,0 +1,16 @@
+schema: expert-profile/v1
+id: style-custodian
+name: Style Custodian
+enabled: true
+agent: style-custodian
+mission: "Custodisce voce e stile senza cambiare eventi o canone."
+domains: {primary: [style-custodian], secondary: []}
+priorities: {domain-quality: 1.0, dramatic-efficiency: 0.7}
+risk-tolerance: low
+decision-weight: 1.0
+must-challenge: []
+must-not-change: [immutable-decisions, canon-without-approval, manuscript]
+knowledge:
+  directories: [knowledge/narrative-methods/, story/, experts/profiles/style-custodian/knowledge/]
+tools: {policy-file: tools.yaml}
+output: {schema: expert-opinion/v1, maximum-findings: 7, require-evidence: true, require-alternative: true, require-confidence: true}

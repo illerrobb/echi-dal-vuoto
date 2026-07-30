@@ -1,0 +1,9 @@
+schema: council-decision/v1
+chapter: chapter-001
+mode: hybrid
+status: awaiting-human
+selected: null
+rejected-invalid: []
+remaining: [alt-a, alt-b, alt-c]
+approved-by: null
+supersedes: null

@@ -1,0 +1,16 @@
+{
+  "name": "echi-dal-vuoto-studio",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/studio.mjs validate",
+    "test": "node --test tests/*.test.mjs",
+    "studio": "node scripts/studio.mjs",
+    "export": "node scripts/studio.mjs export"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "js-yaml": "4.1.0"
+  }
+}

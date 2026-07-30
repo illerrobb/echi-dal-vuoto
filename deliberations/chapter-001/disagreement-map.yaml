@@ -1,0 +1,8 @@
+schema: disagreement-map/v1
+chapter: chapter-001
+agreements: ["Il demo deve restare privo di prosa"]
+disagreements: []
+incompatible-assumptions: []
+risks: [astrazione-eccessiva]
+blocking-problems: []
+unresolved-questions: ["Quale alternativa approverà l'umano?"]

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "permission": {
+    "*": "ask",
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "webfetch": "ask",
+    "bash": {
+      "git status*": "allow",
+      "git diff*": "allow",
+      "npm run validate*": "allow",
+      "node scripts/studio.mjs*": "allow",
+      "rm *": "deny",
+      "git commit*": "ask"
+    }
+  }
+}

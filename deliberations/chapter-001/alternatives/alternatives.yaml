@@ -1,0 +1,6 @@
+schema: alternatives/v1
+subject: chapter-001
+anonymous-alternatives:
+  - {id: alt-a, type: conservative, summary: "Precisare la pressione senza cambiare gli esiti"}
+  - {id: alt-b, type: bold, summary: "Anticipare una conseguenza irreversibile"}
+  - {id: alt-c, type: thematic, summary: "Far incarnare il costo del silenzio nell'azione"}

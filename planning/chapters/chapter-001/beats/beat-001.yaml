@@ -1,0 +1,14 @@
+schema: beat-contract/v1
+identity: {id: beat-001, chapter: chapter-001, title-working: "", status: proposed, version: 1, sequence-index: 1, parent-beat: null, beat-depth: standard}
+classification: {type: action, subtype: null, mode: active, scale: standard}
+purpose: {primary-function: "Creare pressione", secondary-functions: [], why-this-beat-exists: "Causa il beat seguente", removal-test: "La catena causale si spezza", expected-reader-effect: "Curiosità"}
+placement: {previous-beat: null, next-beat: beat-002, location: null, narrative-time: {start: null, end: null}, objective-duration: null, perceived-duration: null}
+point-of-view: {character: null, person: null, tense: null, distance: {start: null, peak: null, end: null}, reliability: {level: null, distortion: null}}
+dramatic: {immediate-goal: {external: "", internal: "", relational: ""}, opposition: {source: "", method: "", intensity: 0.4}, stakes: {external: "", internal: "", relational: "", thematic: ""}, trigger: {event: "", type: ""}, action: {attempt: "", tactic: "", resistance: ""}, turn: {exists: true, type: pressure, event: "", why-it-changes-the-beat: ""}, dilemma: {exists: false, options: [], cost-of-choice: ""}, decision: {exists: false, choice: "", motivation: ""}, outcome: {category: setback, result: "", cost: "", creates-next-pressure: ""}}
+characters: {}
+relationships: {active-dynamics: []}
+theme: {global-question: "", chapter-question: "", beat-question: "", proposition-tested: {apparent: "", counterforce: ""}, position: {statement: "", certainty: provisional}, embodiment: {through-action: [], irony: [], contrast: []}, forbidden: [explicit-authorial-explanation, didactic-dialogue]}
+information: {reveal: [], confirm: [], imply: [], misdirect: [], withhold: [], reader-knows-before: [], pov-knows-before: [], reader-knows-after: [], pov-knows-after: [], reader-ahead-of-pov: false}
+continuity: {required-facts: [], forbidden-facts: [], active-promises: [], active-mysteries: [], objects-required: [], injuries-required: [], location-rules: [], timeline-rules: []}
+execution: {target-length: {min: 300, ideal: 500, max: 700}, pacing: {overall: measured, opening: swift, middle: measured, ending: sharp}, prose: {register: "", abstraction-level: "", metaphor-density: "", sentence-profile: {baseline: "", under-pressure: ""}, exposition-budget-words: 40}, sensory: {dominant: [], secondary: [], prohibited: []}, dialogue: {enabled: true, ratio-maximum: null, directness: indirect, interruption-rate: low, exposition-through-dialogue: forbidden}, style: {voice-reference: "", required-traits: [], prohibited-patterns: [], repeated-words-to-avoid: []}, entry: {first-image-or-action: "", orientation-budget: ""}, exit: {final-change: "", hook-type: pressure, intended-aftertaste: ""}}
+validation: {required-events: [], forbidden-events: [], required-state-changes: [], required-information-changes: [], structural-tests: [], semantic-tests: [], acceptance-thresholds: {}}

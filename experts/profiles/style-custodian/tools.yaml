@@ -1,0 +1,4 @@
+schema: tool-policy/v1
+allow: [read, glob, grep, validate-project]
+ask: [web]
+deny: [delete, manuscript-write, canon-write, decision-write, destructive-shell, git-commit]

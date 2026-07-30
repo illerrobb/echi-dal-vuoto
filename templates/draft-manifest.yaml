@@ -1,0 +1,9 @@
+schema: draft-manifest/v1
+beat: beat-000
+contract-version: 1
+manuscript-version: 1
+compliance: {required-events: {completed: [], missing: []}, forbidden-events: {violations: []}, required-state-changes: {completed: [], missing: []}}
+deviations: []
+emergent-elements: []
+canon-proposals: []
+estimated-effects: {}

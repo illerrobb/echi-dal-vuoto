@@ -1,0 +1,11 @@
+schema: chapter-intent/v1
+identity: {id: chapter-001, working-title: "La soglia", status: proposed, part: null, pov: null, tense: null}
+purpose: {primary-function: "Orientare il conflitto", secondary-functions: [], why-this-chapter-exists: "Stabilire la pressione iniziale", removal-test: "Senza questo capitolo manca la causa del viaggio"}
+questions: {dramatic: "Accetterà la chiamata?", emotional: "Supererà l'esitazione?", thematic: "Il silenzio protegge o isola?"}
+required-outcomes: [pressione-stabilita]
+forbidden-outcomes: [rivelazione-finale]
+starting-state: {plot: {}, characters: {}, relationships: {}, reader-knowledge: {}}
+ending-state: {plot: {}, characters: {}, relationships: {}, reader-knowledge: {}}
+value-shifts: []
+constraints: {continuity: [], thematic: [], stylistic: [], worldbuilding: [], forbidden-information: []}
+estimated: {word-count-min: 800, word-count-ideal: 1200, word-count-max: 1600, number-of-beats: 2}

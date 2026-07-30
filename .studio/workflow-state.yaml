@@ -1,0 +1,8 @@
+schema: workflow-state/v1
+chapter: chapter-001
+state: AWAITING_APPROVAL
+history:
+  - from: BEAT_DESIGN
+    to: AWAITING_APPROVAL
+    reason: Example skeleton and contracts await explicit human approval
+    approved-by: null

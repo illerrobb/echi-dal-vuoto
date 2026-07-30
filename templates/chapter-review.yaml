@@ -1,0 +1,8 @@
+schema: chapter-review/v1
+chapter: chapter-000
+manuscript-version: 1
+checks: {overall-function: null, progression: null, redundancy: null, beat-causality: null, escalation: null, pov-coherence: null, transformations: null, information: null, chapter-value: null, beat-necessity: null, entry: null, exit: null, neighboring-chapters: null}
+evidence: []
+blocking-findings: []
+optional-findings: []
+verdict: revise

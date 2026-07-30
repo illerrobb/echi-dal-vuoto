@@ -1,0 +1,5 @@
+schema: chapter-metadata/v1
+chapter: chapter-001
+status: planned
+manuscript-version: 0
+beats: []
