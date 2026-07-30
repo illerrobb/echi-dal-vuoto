@@ -31,3 +31,10 @@
 
 ## Fase 8 — Documentazione e demo
 **Stato:** completata (2026-07-30). **Obiettivo:** demo, workflow, documentazione e contratto GUI. **Dipendenze:** fasi precedenti. **Completamento/test:** documenti richiesti, demo senza prosa e test completi. **Decisioni/problemi:** esportazione positiva richiede un capitolo realmente accettato.
+
+## Fase 9 — Hardening dei gate
+
+- **Stato:** completata (2026-07-30).
+- **Obiettivo:** eliminare falsi successi, validare schemi dichiarati, legare il drafting alle approvazioni versionate e rendere sicuro l'export multi-capitolo.
+- **Implementazione:** registry dei comandi deterministici/agentici; errori `UNKNOWN_COMMAND` e `AGENT_COMMAND_REQUIRED`; gate di drafting su skeleton, beat e identità umana; root esplicita; validazione bloccante degli schemi sconosciuti; export atomico nell'ordine dell'architettura.
+- **Limite tracciato:** gli schemi legacy nel catalogo sono registrati ma devono essere irrigiditi progressivamente; il CLI applica solo transizioni adiacenti con attore e motivazione espliciti.

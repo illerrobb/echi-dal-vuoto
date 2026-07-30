@@ -4,3 +4,7 @@ test('project fixture validates',()=>{const r=run('validate','--json');assert.eq
 test('drafting is blocked before approval',()=>{const r=run('beat-draft','beat-001','--json');assert.equal(r.status,1);assert.match(r.stdout,/Transizione negata/)});
 test('export is blocked before acceptance',()=>{const r=run('export','--json');assert.equal(r.status,1);assert.match(r.stdout,/Esportazione bloccata/)});
 test('machine status is stable',()=>{const r=run('project-status','--json');const d=JSON.parse(r.stdout);assert.equal(d.state,'AWAITING_APPROVAL');assert.deepEqual(d.paths,['.studio/workflow-state.yaml'])});
+test('unknown commands fail explicitly',()=>{const r=run('typo','--json');assert.equal(r.status,1);assert.match(r.stdout,/UNKNOWN_COMMAND/)});
+test('agent commands require OpenCode',()=>{const r=run('council','chapter-001','--json');assert.equal(r.status,1);assert.match(r.stdout,/AGENT_COMMAND_REQUIRED/)});
+test('drafting also reports missing artifact approvals',()=>{const r=run('beat-draft','beat-001','--json');assert.equal(r.status,1);assert.match(r.stdout,/Chapter Skeleton non approvato/);assert.match(r.stdout,/Approvazione umana versionata mancante/)});
+test('illegal workflow transitions are rejected without mutation',()=>{const r=run('transition','CHAPTER_ACCEPTED','--actor','human','--reason','test','--json');assert.equal(r.status,1);assert.match(r.stdout,/Transizione illegale/);assert.equal(run('project-status','--json').stdout.includes('AWAITING_APPROVAL'),true)});
