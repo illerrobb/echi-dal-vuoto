@@ -174,7 +174,7 @@ function exportManuscript(){
 }
 
 const deterministic=new Set(['validate','validate-project','project-status','transition','export','export-manuscript','beat-draft','beat-audit','beat-revise','canon-update','help']);
-const agentic=new Set(['project-init','book-architecture','chapter-intent','council','chapter-skeleton','beat-design','chapter-review']);
+const agentic=new Set(['project-init','creative-direction','book-architecture','chapter-intent','council','chapter-skeleton','beat-design','chapter-review']);
 if(!fs.existsSync(path.join(root,'.studio/project.yaml')))result(false,command,{},[`Project root non valida: ${root}`]);
 else if(!deterministic.has(command))result(false,command,{requiredHarness:agentic.has(command)?'opencode':null},[agentic.has(command)?`AGENT_COMMAND_REQUIRED: ${command} richiede OpenCode`:`UNKNOWN_COMMAND: ${command}`]);
 else switch(command){

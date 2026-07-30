@@ -18,7 +18,7 @@ Story Skills e Better Writing sono pinning locale in `vendor/` e installazione i
 
 ## Workflow
 
-1. `/project-status`, poi `/book-architecture` e `/chapter-intent chapter-001`.
+1. `/project-status`, poi `/creative-direction` per fissare l'identità artistica prima di `/book-architecture` e `/chapter-intent chapter-001`.
 2. `/council chapter-001` produce briefing, opinioni indipendenti, divergenze, alternative, valutazione cieca e decisione.
 3. `/chapter-skeleton chapter-001` e `/beat-design beat-001` producono specifiche, mai prosa.
 4. Un umano approva esplicitamente skeleton e tutti i contratti e porta lo stato a `DRAFTING`.
@@ -35,3 +35,5 @@ node scripts/studio.mjs export --json               # richiede CHAPTER_ACCEPTED
 ```
 
 I comandi OpenCode sono in `.opencode/commands/`, gli agenti in `.opencode/agents/`, gli esperti sono configurabili in `experts/`. Vedere `docs/workflows.md` per drafting/audit/revisione e `docs/opencode-integration.md` per l'invocazione subprocess.
+
+Il Creative Direction Council combina Creative Director, Genre & Form Specialist e Artistic Provocateur. Usa knowledge pack modulari in `knowledge/genres/` e `knowledge/forms/`; la scelta resta umana e il brief approvato vive in `knowledge/project/creative-direction.md`.

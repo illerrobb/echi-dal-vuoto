@@ -1,6 +1,15 @@
 schema: expert-registry/v1
 decision-mode: hybrid
 experts:
+  - id: creative-director
+    enabled: true
+    weight: 1.0
+  - id: genre-form-specialist
+    enabled: true
+    weight: 0.9
+  - id: artistic-provocateur
+    enabled: true
+    weight: 0.7
   - id: narrative-architect
     enabled: true
     weight: 1.0
