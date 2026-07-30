@@ -45,3 +45,11 @@
 - **Obiettivo:** chiudere i falsi positivi residui prima del drafting e rendere diagnostici gli artefatti malformati.
 - **Implementazione:** controllo condiviso delle versioni approvate e della copertura esatta dei beat; validazione in due fasi con controlli semantici solo su documenti conformi; contratti minimi reali per tutti gli schemi del catalogo.
 - **Test:** fixture isolate per artefatti incompleti, schemi catalogo permissivi, approvazioni obsolete e approvazioni complete.
+
+## Fase 11 — Direzione creativa e knowledge pack
+
+- **Stato:** completata (2026-07-30).
+- **Obiettivo:** aiutare l'autore a scegliere l'identità artistica prima dell'architettura senza delegare approvazioni o introdurre nuove gerarchie narrative.
+- **Implementazione:** Creative Direction Council con tre ruoli complementari; comando agentico `/creative-direction`; profili, rubriche e minimo privilegio; brief di progetto; knowledge pack espandibili per fantascienza, horror, romanzo e tecniche di sceneggiatura; fonti e limiti tracciati.
+- **Decisioni:** nessun nuovo stato della state machine; generi e media sono knowledge pack componibili; screenplay è consulenza trasferibile al romanzo e non introduce `scenes/`; output sempre `awaiting-human`.
+- **Test:** validazione YAML/schema, riconoscimento CLI del comando agentico, test completi e verifica dipendenze.

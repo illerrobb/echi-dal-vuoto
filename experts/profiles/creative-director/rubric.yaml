@@ -1,0 +1,7 @@
+schema: expert-rubric/v1
+scale: {minimum: 0, maximum: 1, scientific-measure: false}
+criteria:
+  - {id: author-intent-traceability, weight: 1.0, requires-citation: true}
+  - {id: artistic-coherence, weight: 1.0, requires-citation: true}
+  - {id: meaningful-choice, weight: 0.9, requires-citation: false}
+  - {id: unresolved-tensions, weight: 0.8, requires-citation: true}
